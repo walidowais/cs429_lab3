@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void process(void);
 int add_node(char *p_name, char *p_prop, char *p_val);
