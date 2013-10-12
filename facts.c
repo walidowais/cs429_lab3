@@ -41,6 +41,8 @@ int main(int argc, char const *argv[])
 		questions = stdin;
 		
 		process();
+
+		fclose(facts);
 	}
 	else{
 		if(argc > 3){
@@ -60,6 +62,9 @@ int main(int argc, char const *argv[])
 		}
 
 		process();
+
+		fclose(facts);
+		fclose(questions);
 	}
 	
 	return 0;
