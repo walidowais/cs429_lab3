@@ -102,6 +102,10 @@ void fax(void){
 			c = trim_before(c, facts);
 			str_max = 8;
 			str_name = malloc(str_max * sizeof(char));
+			if(str_name == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_size = 0;
 
 			while(c != ':'){
@@ -109,6 +113,10 @@ void fax(void){
 				if(str_size >= str_max){
 					str_max += 8;
 					str_name = realloc(str_name, str_max*sizeof(char));
+					if(str_name == NULL){
+						fprintf(stderr, "Out of memory.\n");
+						exit(1);
+					}
 				}
 
 				str_name[str_size] = c;
@@ -119,6 +127,10 @@ void fax(void){
 
 			str_size = trim_after(str_name, str_size);
 			str_name = realloc(str_name, str_size*sizeof(char));
+			if(str_name == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_name[str_size] = '\0';
 
 			// property
@@ -126,6 +138,10 @@ void fax(void){
 			c = trim_before(c, facts);
 			str_max = 8;
 			str_prop = malloc(str_max * sizeof(char));
+			if(str_prop == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_size = 0;
 
 			while(c != '='){
@@ -133,6 +149,10 @@ void fax(void){
 				if(str_size >= str_max){
 					str_max += 8;
 					str_prop = realloc(str_prop, str_max * sizeof(char));
+					if(str_prop == NULL){
+						fprintf(stderr, "Out of memory.\n");
+						exit(1);
+					}
 				}
 
 				str_prop[str_size] = c;
@@ -143,6 +163,10 @@ void fax(void){
 
 			str_size = trim_after(str_prop, str_size);
 			str_prop = realloc(str_prop, str_size * sizeof(char));
+			if(str_prop == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_prop[str_size] = '\0';
 
 			// value
@@ -150,6 +174,10 @@ void fax(void){
 			c = trim_before(c, facts);
 			str_max = 8;
 			str_val = malloc(str_max * sizeof(char));
+			if(str_val == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_size = 0;
 
 			while((c != '\n') && (c != EOF)){
@@ -157,6 +185,10 @@ void fax(void){
 				if(str_size >= str_max){
 					str_max += 8;
 					str_val = realloc(str_val, str_max * sizeof(char));
+					if(str_val == NULL){
+						fprintf(stderr, "Out of memory.\n");
+						exit(1);
+					}
 				}
 
 				str_val[str_size] = c;
@@ -167,6 +199,10 @@ void fax(void){
 
 			str_size = trim_after(str_val, str_size);
 			str_val = realloc(str_val, str_size*sizeof(char));
+			if(str_val == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_val[str_size] = '\0';
 			
 			// add to list
@@ -198,6 +234,10 @@ void qux(void){
 			c = trim_before(c, questions);
 			str_max = 8;
 			str_name = malloc(str_max * sizeof(char));
+			if(str_name == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_size = 0;
 
 			while(c != ':'){
@@ -205,6 +245,10 @@ void qux(void){
 				if(str_size >= str_max){
 					str_max += 8;
 					str_name = realloc(str_name, str_max * sizeof(char));
+					if(str_name == NULL){
+						fprintf(stderr, "Out of memory.\n");
+						exit(1);
+					}
 				}
 
 				str_name[str_size] = c;
@@ -215,6 +259,10 @@ void qux(void){
 
 			str_size = trim_after(str_name, str_size);
 			str_name = realloc(str_name, str_size * sizeof(char));
+			if(str_name == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_name[str_size] = '\0';
 
 			// property
@@ -222,6 +270,10 @@ void qux(void){
 			c = trim_before(c, questions);
 			str_max = 8;
 			str_prop = malloc(str_max * sizeof(char));
+			if(str_prop == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_size = 0;
 
 			while((c != '\n') && (c != EOF)){
@@ -229,6 +281,10 @@ void qux(void){
 				if(str_size >= str_max){
 					str_max += 8;
 					str_prop = realloc(str_prop, str_max * sizeof(char));
+					if(str_prop == NULL){
+						fprintf(stderr, "Out of memory.\n");
+						exit(1);
+					}
 				}
 
 				str_prop[str_size] = c;
@@ -239,6 +295,10 @@ void qux(void){
 
 			str_size = trim_after(str_prop, str_size);
 			str_prop = realloc(str_prop, str_size * sizeof(char));
+			if(str_prop == NULL){
+				fprintf(stderr, "Out of memory.\n");
+				exit(1);
+			}
 			str_prop[str_size] = '\0';
 
 			// search list
@@ -254,6 +314,10 @@ int add_node(char *p_name, char *p_prop, char *p_val){
 
 	if(current == 0){
 		current = malloc(sizeof(struct node));
+		if(current == NULL){
+			fprintf(stderr, "Out of memory.\n");
+			exit(1);
+		}
 		current->next = 0;
 		current->name = p_name;
 		current->property = p_prop;
@@ -292,6 +356,10 @@ int add_node(char *p_name, char *p_prop, char *p_val){
 			}
 
 		current->next = malloc(sizeof(struct node));
+		if(current->next == NULL){
+			fprintf(stderr, "Out of memory.\n");
+			exit(1);
+		}
 		current = current->next;
 		current->next = 0;
 		current->name = p_name;
