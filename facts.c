@@ -112,6 +112,12 @@ void process(void){
 
 				c = getc(facts);
 			}
+			if(str_size >= str_max){
+				str_max += 8;
+				str_name = realloc(str_name, str_max*sizeof(char));
+			}
+			str_name[str_size] = '\0';
+			str_size++;
 			// fprintf(stdout, "\n");
 
 			c = getc(facts);
@@ -122,7 +128,7 @@ void process(void){
 			str_size = 0;
 
 			while((c != '=') ){
-				// fprintf(stdout, "%c", c);
+				fprintf(stdout, "%c", c);
 
 				if(str_size >= str_max){
 					str_max += 8;
@@ -133,6 +139,12 @@ void process(void){
 
 				c = getc(facts);
 			}
+			if(str_size >= str_max){
+				str_max += 8;
+				str_prop = realloc(str_prop, str_max*sizeof(char));
+			}
+			str_prop[str_size] = '\0';
+			str_size++;
 			// fprintf(stdout, "\n");
 
 			c = getc(facts);
@@ -144,7 +156,6 @@ void process(void){
 
 			while((c != '\n') ){
 				// fprintf(stdout, "%c", c);
-
 				if(str_size >= str_max){
 					str_max += 8;
 					str_val = realloc(str_val, str_max*sizeof(char));
@@ -154,6 +165,13 @@ void process(void){
 
 				c = getc(facts);
 			}
+			if(str_size >= str_max){
+				str_max += 8;
+				str_val = realloc(str_val, str_max*sizeof(char));
+			}
+			str_val[str_size] = '\0';
+			str_size++;
+			
 			add_node(str_name, str_prop, str_val);
 		}
 

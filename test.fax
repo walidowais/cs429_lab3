@@ -19,4 +19,5 @@ F IBM360: address-size=24
 F IBM360: number_registers=16
 F IBM360: opcode_bits=8
 F IBM360: character_set=EBCDIC
+F IBM360: character_set=DUPLICATE
 
