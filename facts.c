@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
 }
 
 void process(void){
-	char c;
+	int c;
 	char *str_name;
 	char *str_prop;
 	char *str_val;
@@ -112,12 +112,13 @@ void process(void){
 
 				c = getc(facts);
 			}
-			if(str_size >= str_max){
-				str_max += 8;
-				str_name = realloc(str_name, str_max*sizeof(char));
-			}
-			str_name[str_size] = '\0';
+			// if(str_size >= str_max){
+			// 	str_max += 8;
+			// 	str_name = realloc(str_name, str_max*sizeof(char));
+			// }
 			str_size++;
+			str_name = realloc(str_name, str_size*sizeof(char));
+			str_name[str_size] = '\0';
 			// fprintf(stdout, "\n");
 
 			c = getc(facts);
@@ -128,7 +129,7 @@ void process(void){
 			str_size = 0;
 
 			while((c != '=') ){
-				fprintf(stdout, "%c", c);
+				// fprintf(stdout, "%c", c);
 
 				if(str_size >= str_max){
 					str_max += 8;
@@ -139,12 +140,9 @@ void process(void){
 
 				c = getc(facts);
 			}
-			if(str_size >= str_max){
-				str_max += 8;
-				str_prop = realloc(str_prop, str_max*sizeof(char));
-			}
-			str_prop[str_size] = '\0';
 			str_size++;
+			str_prop = realloc(str_prop, str_size*sizeof(char));
+			str_prop[str_size] = '\0';
 			// fprintf(stdout, "\n");
 
 			c = getc(facts);
@@ -165,12 +163,9 @@ void process(void){
 
 				c = getc(facts);
 			}
-			if(str_size >= str_max){
-				str_max += 8;
-				str_val = realloc(str_val, str_max*sizeof(char));
-			}
-			str_val[str_size] = '\0';
 			str_size++;
+			str_val = realloc(str_val, str_size*sizeof(char));
+			str_val[str_size] = '\0';
 			
 			add_node(str_name, str_prop, str_val);
 		}
@@ -206,16 +201,26 @@ int add_node(char *p_name, char *p_prop, char *p_val){
 			
 			if((strcmp(current->name, p_name) == 0) && 
 			(strcmp(current->property, p_prop) == 0) ){
-				current->value = p_val;
+				// fprintf(stdout, "%s replaces %s\n", p_val, current->value);
 				free(p_name);
 				free(p_prop);
-				free(p_val);
-				fprintf(stderr, "ERORE\n");
+				free(current->value);
+				current->value = p_val;
 				return 0;
 			}
 
 			current = current->next;
 		}
+
+		if((strcmp(current->name, p_name) == 0) && 
+		(strcmp(current->property, p_prop) == 0) ){
+				// fprintf(stdout, "%s replaces %s\n", p_val, current->value);
+				free(p_name);
+				free(p_prop);
+				free(current->value);
+				current->value = p_val;
+				return 0;
+			}
 
 		current->next = malloc(sizeof(struct node));
 		current = current->next;
@@ -239,7 +244,8 @@ void print_list(void){
 	if(current != 0){
 		// fprintf(stdout, "\nroot");
 		while(current != 0){
-			fprintf(stdout, "%s : %s = %s\n", current->name, current->property, current->value);
+			fprintf(stdout, "%s : %s = %s\n", 
+				current->name, current->property, current->value);
 			current = current->next;
 		}
 		// fprintf(stdout, "<----last\n");

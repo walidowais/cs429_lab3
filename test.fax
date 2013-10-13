@@ -5,6 +5,7 @@ F CDC6600: address-size=18
 Walid
 F CDC6600: number_registers=24
 F CDC6600: opcode_bits=6
+F CDC6600: number_registers=666
 F CDC6600: character_set=BCD
 
 F PDP11: word-size=16
@@ -19,5 +20,4 @@ F IBM360: address-size=24
 F IBM360: number_registers=16
 F IBM360: opcode_bits=8
 F IBM360: character_set=EBCDIC
-F IBM360: character_set=DUPLICATE
-
+F IBM360: character_set=FUCKED
